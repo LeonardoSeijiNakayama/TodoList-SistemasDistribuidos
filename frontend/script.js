@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const addTaskButton = document.getElementById("addTaskButton");
     const taskList = document.querySelector(".task-list");
 
-    // Carrega as tarefas do servidor
+    //carrega as tarefas do servidor
     async function loadTasks() {
         const res = await fetch("/api/tasks");
         const tasks = await res.json();
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         tasks.forEach(task => createTaskElement(task));
     }
 
-    // Cria o HTML de uma tarefa
+    //cria o HTML de uma tarefa
     function createTaskElement(task) {
         const taskItem = document.createElement("div");
         taskItem.classList.add("task-item");
@@ -20,14 +20,14 @@ document.addEventListener("DOMContentLoaded", () => {
         taskContent.textContent = task.text;
         taskItem.appendChild(taskContent);
 
-        // Botão editar
+        //botão editar
         const editButton = document.createElement("button");
         editButton.innerHTML = "<img src='img/lapis.png'/>";
         editButton.classList.add("edit-btn");
         editButton.addEventListener("click", () => editTask(task, taskItem, taskContent));
         taskItem.appendChild(editButton);
 
-        // Botão excluir
+        //botão excluir
         const deleteButton = document.createElement("button");
         deleteButton.innerHTML = "<img src='img/x.png'/>";
         deleteButton.classList.add("delete-btn");
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         taskList.appendChild(taskItem);
     }
 
-    // Adiciona nova tarefa
+    //adiciona nova tarefa
     async function addTask() {
         const text = taskInput.value.trim();
         if (text === "") return;
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
         taskInput.value = "";
     }
 
-    // Edita uma tarefa
+    //edita uma tarefa
     function editTask(task, taskItem, taskContent) {
         const editInput = document.createElement("input");
         editInput.type = "text";
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Exclui uma tarefa
+    //exclui uma tarefa
     async function deleteTask(id) {
         await fetch(`/api/tasks/${id}`, {
             method: "DELETE"
